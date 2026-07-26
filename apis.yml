@@ -1,25 +1,89 @@
 aid: lawn-love
 name: Lawn Love
-description: Lawn Love is a company surfaced as a portfolio company of bullpen-capital and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: 'Lawn Love is an on-demand lawn care and outdoor home services marketplace that matches homeowners with vetted, independent lawn care professionals across more than 120 US cities. Customers get instant online quotes and book mowing, fertilization, aeration, seeding, pre-emergent and general weed control, bush trimming, leaf removal, gutter cleaning, yard clean-up and snow removal, on either pay-as-you-go or recurring schedules, and manage jobs through the my.lawnlove.com customer app and iOS/Android apps; providers take and service work through pros.lawnlove.com and the Lawn Love for Providers apps. Lawn Love operates as part of LawnStarter. It publishes no public developer API, no developer portal and no API documentation - the api.lawnlove.com host is an undocumented, noindexed backend serving its own web and mobile clients.'
 url: https://raw.githubusercontent.com/api-evangelist/lawn-love/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://lawnlove.com/assets/static/efa7ec79-825e-4e30-bb8f-d4fdd8c06e80/build/assets/og_image-CumH_kHu.jpg
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
-- bullpen-capital
-x-tier: stub
-x-tier-reason: portfolio-lead
+  - bullpen-capital
+x-parent-company: lawnstarter
+x-tier: enriched
+x-tier-reason: probed-no-public-api
+x-public-api: false
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-25'
 tags:
-- Company
+  - Company
+  - Home Services
+  - Lawn Care
+  - Marketplace
+  - On Demand
+  - Field Service
+  - Scheduling
+  - Local Services
+  - Consumer
 apis: []
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
-- FN: APIs.json
-  email: info@apis.io
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+  - FN: APIs.json
+    email: info@apis.io
 common:
-- type: Website
-  url: https://lawnlove.com
+  - type: Website
+    url: https://lawnlove.com
+  - type: About
+    url: https://lawnlove.com/about
+  - type: Blog
+    url: https://lawnlove.com/blog
+  - type: BlogRSS
+    url: https://lawnlove.com/blog/feed/
+  - type: Pricing
+    url: https://lawnlove.com/pricing
+  - type: SignUp
+    url: https://signup-web.lawnlove.com/cart/contact-info
+  - type: Login
+    url: https://my.lawnlove.com
+  - type: Support
+    url: https://support.lawnlove.com/hc/en-us
+  - type: TermsOfService
+    url: https://lawnlove.com/terms
+  - type: PrivacyPolicy
+    url: https://lawnlove.com/privacy
+  - type: EULA
+    url: https://lawnlove.com/eula
+  - type: GitHubOrganization
+    url: https://github.com/lawnlove
+  - type: Reviews
+    url: https://lawnlove.com/reviews
+  - type: Locations
+    url: https://lawnlove.com/locations
+  - type: Careers
+    url: https://apply.workable.com/lawnstarter/
+  - type: LinkedIn
+    url: https://linkedin.com/company/lawn-love
+  - type: Facebook
+    url: https://facebook.com/lawnlove
+  - type: iOSApp
+    url: https://apps.apple.com/us/app/lawn-love/id6444220363
+  - type: AndroidApp
+    url: https://play.google.com/store/apps/details?id=com.lawnlove.customers
+  - type: DomainSecurity
+    url: security/lawn-love-domain-security.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
