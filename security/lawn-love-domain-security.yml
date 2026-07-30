@@ -1,0 +1,82 @@
+generated: '2026-07-19'
+method: probed
+source: dig + curl probes of lawnlove.com and api.lawnlove.com
+domain: lawnlove.com
+hosts:
+- host: lawnlove.com
+  tls:
+    https: true
+    certificate_verified: true
+    edge: cloudflare
+    application: laravel-vapor
+    evidence: >-
+      HTTP/2 200 over TLS with ssl_verify_result=0; response carries
+      server: cloudflare and x-vapor-base64-encode headers
+  hsts:
+    present: false
+    evidence: no strict-transport-security header on the apex response
+  headers:
+    cache_control: 'no-cache, private'
+    cookies_secure: true
+    cookies_samesite: lax
+- host: api.lawnlove.com
+  tls:
+    https: true
+    certificate_verified: true
+    edge: cloudflare + aws-cloudfront + api-gateway
+    evidence: >-
+      response headers include x-amz-apigw-id, via 1.1 ... cloudfront.net,
+      and server: cloudflare
+  hsts:
+    present: true
+    max_age: 300
+    include_subdomains: true
+    evidence: 'strict-transport-security: max-age=300; includeSubDomains'
+    note: >-
+      max-age of 300 seconds is far below the 31536000 (1 year) commonly
+      recommended for preload-eligible HSTS
+  headers:
+    x_frame_options: SAMEORIGIN
+    x_content_type_options: nosniff
+    referrer_policy: strict-origin-when-cross-origin
+    access_control_allow_origin: '*'
+dns:
+  nameservers:
+  - sara.ns.cloudflare.com
+  - mitch.ns.cloudflare.com
+  a_records:
+  - 172.66.174.91
+  - 104.20.32.191
+  dnssec:
+    enabled: false
+    evidence: no DS record returned for lawnlove.com
+  caa:
+    present: false
+    evidence: no CAA records returned for lawnlove.com
+email:
+  spf:
+    present: true
+    record: 'v=spf1 include:sendgrid.net include:_spf.google.com include:servers.mcsv.net include:mail.zendesk.com ~all'
+    policy: softfail
+    senders:
+    - sendgrid.net
+    - _spf.google.com
+    - servers.mcsv.net
+    - mail.zendesk.com
+  dmarc:
+    present: true
+    record: 'v=DMARC1; p=none; rua=mailto:media@lawnlove.com'
+    policy: none
+    aggregate_reports: media@lawnlove.com
+    note: >-
+      p=none is monitor-only and does not instruct receivers to quarantine or
+      reject spoofed mail
+findings:
+- severity: low
+  finding: No DNSSEC (no DS record published).
+- severity: low
+  finding: No CAA record, so any public CA may issue for the domain.
+- severity: low
+  finding: No HSTS on the apex host; api.lawnlove.com sets only max-age=300.
+- severity: low
+  finding: DMARC policy is p=none (monitoring only, no enforcement).

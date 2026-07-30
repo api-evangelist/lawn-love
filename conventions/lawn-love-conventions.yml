@@ -1,0 +1,84 @@
+generated: '2026-07-19'
+method: probed
+source: unauthenticated probes of https://api.lawnlove.com
+scope: >-
+  Lawn Love publishes no API documentation, no OpenAPI, and no developer
+  portal. Nothing here is derived from a specification - every entry is either
+  something observed on the wire during discovery probing or an explicit
+  "unknown / no published evidence". Absence of evidence below means the
+  convention could not be observed without authentication or documentation, NOT
+  that the API lacks it.
+api: api.lawnlove.com
+documented: false
+authentication:
+  documented: false
+  observed: unknown
+  note: >-
+    No auth scheme could be determined. Unauthenticated GETs to unknown routes
+    return 404 rather than 401/403, so the API does not advertise a challenge
+    on those paths. No WWW-Authenticate header was observed.
+  see: null
+idempotency:
+  supported: unknown
+  documented: false
+  note: >-
+    No idempotency header, key, or retention policy is documented or was
+    observed. No Idempotency pointer is emitted for this provider.
+pagination:
+  style: unknown
+  documented: false
+  note: no list endpoint was reachable unauthenticated
+versioning:
+  style: unknown
+  documented: false
+  note: >-
+    A /v1 path segment was probed and returned 404 ("Record Not Found"), so a
+    /v1 URI-versioning scheme is NOT in use at the root. No version header was
+    observed on responses.
+error_envelope:
+  format: vendor-json
+  rfc9457: false
+  shape: '{"error": {"code": "...", "message": "...", "field_messages": []}}'
+  consistent_across_statuses: false
+  see: errors/lawn-love-error-codes.yml
+rate_limiting:
+  signaled: false
+  note: >-
+    No RateLimit, X-RateLimit-*, or Retry-After headers were observed on any
+    probed response.
+request_tracing:
+  supported: true
+  headers:
+  - name: x-amzn-requestid
+    note: AWS API Gateway request id, returned on api.lawnlove.com responses
+  - name: x-amz-apigw-id
+    note: AWS API Gateway execution id
+  - name: x-amz-cf-id
+    note: CloudFront request id
+  - name: cf-ray
+    note: Cloudflare edge request id
+  note: >-
+    These are infrastructure-emitted identifiers from AWS API Gateway,
+    CloudFront and Cloudflare, not a first-party correlation-id convention.
+cors:
+  enabled: true
+  access_control_allow_origin: '*'
+  observed_on: https://api.lawnlove.com/
+content_type:
+  request: unknown
+  response: application/json
+  note: JSON observed on /health and on error responses
+health_check:
+  path: /health
+  status: 200
+  response: '{"status":"OK","brand":"lawnlove"}'
+  note: >-
+    Unauthenticated liveness endpoint. The "brand" member indicates the backend
+    is multi-brand (shared with LawnStarter properties).
+graphql:
+  endpoint: https://api.lawnlove.com/graphql
+  present: probable
+  evidence: >-
+    GET /graphql returns HTTP 400 with a validation error envelope, whereas
+    unknown routes return 404. No introspection was attempted and no schema is
+    published.

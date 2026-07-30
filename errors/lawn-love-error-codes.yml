@@ -1,0 +1,54 @@
+generated: '2026-07-19'
+method: probed
+source: unauthenticated probes of https://api.lawnlove.com
+scope: >-
+  Lawn Love publishes no error reference. The entries below are the error
+  envelopes actually observed from api.lawnlove.com during discovery probing.
+  This is an observed sample, NOT a complete registry - only the responses
+  listed here were seen. Do not treat absence from this list as meaningful.
+format: vendor-json
+rfc9457: false
+envelope:
+  shape: '{"error": {"code": "<string>", "message": "<string>", "field_messages": []}}'
+  root_field: error
+  fields:
+  - name: code
+    type: string
+    required: false
+    note: observed as a zero-padded string ("000"); absent on some responses
+  - name: message
+    type: string
+    required: true
+    note: human-readable, not machine-stable
+  - name: field_messages
+    type: array
+    required: false
+    note: observed empty; presumed to carry per-field validation detail
+  content_type: application/json
+errors:
+- http_status: 400
+  code: '000'
+  message: The provided data is invalid.
+  observed_at: GET https://api.lawnlove.com/graphql
+  meaning: >-
+    Generic request-validation failure. Returned when the endpoint exists but
+    the request payload/method is not acceptable.
+  evidence: '{"error":{"code":"000","message":"The provided data is invalid.","field_messages":[]}}'
+- http_status: 404
+  code: null
+  message: Record Not Found
+  observed_at: GET https://api.lawnlove.com/v1
+  meaning: >-
+    Route or resource does not exist. Note this envelope omits the code and
+    field_messages members present on the 400 shape.
+  evidence: '{"error":{"message":"Record Not Found"}}'
+notes:
+- >-
+  The envelope is not consistent across statuses - the 404 shape drops `code`
+  and `field_messages`, so consumers cannot rely on `error.code` being present.
+- >-
+  No application/problem+json (RFC 9457) support was observed.
+- >-
+  api.lawnlove.com is an undocumented backend for the Lawn Love web and mobile
+  apps; these observations come from unauthenticated requests only and no
+  authenticated or write surface was exercised.

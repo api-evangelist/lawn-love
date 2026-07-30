@@ -1,0 +1,28 @@
+{
+  "repo": "lawn-love",
+  "feeds": [
+    {
+      "source": "https://lawnlove.com/about",
+      "feed_url": "https://lawnlove.com/about",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://lawnlove.com/blog/feed/",
+      "feed_url": "https://lawnlove.com/blog/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://lawnlove.com/blog",
+      "feed_url": "https://lawnlove.com/blog/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-07-25T15:00:33Z"
+}

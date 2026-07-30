@@ -1,0 +1,52 @@
+generated: '2026-07-19'
+method: searched
+source: probe of https://lawnlove.com and https://api.lawnlove.com
+summary: >-
+  No /.well-known/ discovery documents are published on either host. The apex
+  host (lawnlove.com) is a catch-all SPA/CMS that answers HTTP 200 for every
+  path and serves a meta-refresh redirect back to the site root, so a raw 200
+  status on a .well-known path is a SOFT 404, not a document. This was verified
+  with a control request to a random non-existent path, which behaved
+  identically. The api.lawnlove.com host returns honest 404s and has no
+  .well-known surface either.
+hosts:
+- host: https://lawnlove.com
+  soft_404: true
+  soft_404_evidence: >-
+    GET /zzz-definitely-not-a-real-page-12345 returned 200 and redirected to
+    https://lawnlove.com/ ; GET /.well-known/security.txt returned an HTML
+    meta-refresh page titled "Redirecting to https://lawnlove.com/.well-known"
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    present: false
+    note: soft 404 - HTML redirect to site root, not an RFC 9116 document
+  - path: /.well-known/openid-configuration
+    status: 200
+    present: false
+    note: soft 404 - HTML redirect to site root
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    present: false
+    note: soft 404 - HTML redirect to site root
+  - path: /.well-known/api-catalog
+    status: 200
+    present: false
+    note: soft 404 - HTML redirect to site root
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    present: false
+    note: soft 404 - HTML redirect to site root
+- host: https://api.lawnlove.com
+  soft_404: false
+  soft_404_evidence: >-
+    GET /v1 returned 404 with body {"error":{"message":"Record Not Found"}}
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    present: false
+llms_txt:
+  path: https://lawnlove.com/llms.txt
+  status: 200
+  present: false
+  note: soft 404 - HTML redirect to site root, not an llms.txt document
