@@ -2,6 +2,17 @@ aid: lawn-love
 name: Lawn Love
 description: 'Lawn Love is an on-demand lawn care and outdoor home services marketplace that matches homeowners with vetted, independent lawn care professionals across more than 120 US cities. Customers get instant online quotes and book mowing, fertilization, aeration, seeding, pre-emergent and general weed control, bush trimming, leaf removal, gutter cleaning, yard clean-up and snow removal, on either pay-as-you-go or recurring schedules, and manage jobs through the my.lawnlove.com customer app and iOS/Android apps; providers take and service work through pros.lawnlove.com and the Lawn Love for Providers apps. Lawn Love operates as part of LawnStarter. It publishes no public developer API, no developer portal and no API documentation - the api.lawnlove.com host is an undocumented, noindexed backend serving its own web and mobile clients.'
 url: https://raw.githubusercontent.com/api-evangelist/lawn-love/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: unknown
